@@ -63,20 +63,19 @@ flask run
 - 默认会跳转到登录页面：http://localhost:5000/login
 - 首次使用需要注册账号 或 使用 账号/密码: admin/admin
 
-### 以下为可选内容 爬取数据
+## 爬取数据 (可选)
 如果需要最新数据，运行爬虫脚本：
 
-### 1. 数据库配置
-1. 创建数据库：
+**1. 创建数据库：**
 ```sql
 CREATE DATABASE boss DEFAULT CHARACTER SET utf8mb4;
 ```
 
-2. 导入数据库表结构：
+**2. 导入数据库表结构：**
 `user.sql`
 `jobs_info.sql`
 
-3. 修改数据库连接配置（utils/config.py）：
+**3. 修改数据库连接配置（utils/config.py）：**
 ```python
 DB_CONFIG = {
     'host': 'localhost',
@@ -87,7 +86,7 @@ DB_CONFIG = {
 }
 ```
 
-运行爬虫脚本
+**4. 运行爬虫脚本**
 ```bash
 python jobSpider.py
 ```
