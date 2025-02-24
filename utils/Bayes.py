@@ -7,7 +7,13 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import make_column_transformer
 from sklearn.naive_bayes import CategoricalNB
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import accuracy_score, classification_report, precision_score, recall_score, f1_score
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    precision_score,
+    recall_score,
+    f1_score,
+)
 from utils.config import DB_CONFIG
 
 # 使用配置创建数据库连接
@@ -17,21 +23,19 @@ con = create_engine(
 )
 
 # 从数据库中读取数据
-df = pd.read_sql('select degree,categories,area,salary from jobs_info', con=con)
+df = pd.read_sql("select degree,categories,area,salary from jobs_info", con=con)
 
 # 对薪资进行分箱处理
 binary = [0, 2000, 6000, 10000, 20000, np.inf]
-df['salary'] = pd.cut(df['salary'].astype(float), bins=binary, labels=False)
+df["salary"] = pd.cut(df["salary"].astype(float), bins=binary, labels=False)
 
 # 定义分类特征列
-categorical_columns = ['degree', 'categories', 'area']
+categorical_columns = ["degree", "categories", "area"]
 
-df[categorical_columns] = df[categorical_columns].astype('category')
+df[categorical_columns] = df[categorical_columns].astype("category")
 
 # 使用OneHotEncoder对分类变量进行编码
-enc = make_column_transformer(
-    (OneHotEncoder(), categorical_columns)
-)
+enc = make_column_transformer((OneHotEncoder(), categorical_columns))
 
 # 检查数据框是否为空
 if df.empty:
@@ -44,10 +48,12 @@ if missing_columns:
 
 # 进行编码
 X_train_encoded = enc.fit_transform(df[categorical_columns])
-y_train = df['salary']
+y_train = df["salary"]
 
 # 划分训练集和测试集
-X_train, X_test, y_train, y_test = train_test_split(X_train_encoded, y_train, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X_train_encoded, y_train, test_size=0.2, random_state=42
+)
 
 # 创建并训练模型
 model = MultinomialNB()
@@ -64,7 +70,7 @@ def evaluate_model():
     print(classification_report(y_test, y_pred, zero_division=1))
 
     # 输出测试集和预测集的薪资分布
-    name = ['0-2000', '2000-6000', '6000-10000', '10000-20000', '20000以上']
+    name = ["0-2000", "2000-6000", "6000-10000", "10000-20000", "20000以上"]
 
     y_test_label = []
     y_pred_label = []
@@ -75,8 +81,8 @@ def evaluate_model():
         y_pred_in_bin = int((y_pred == i).sum())
         y_test_label.append(y_test_in_bin)
         y_pred_label.append(y_pred_in_bin)
-        test.append({'value': y_test_in_bin, 'name': bin_name})
-        pred.append({'value': y_pred_in_bin, 'name': bin_name})
+        test.append({"value": y_test_in_bin, "name": bin_name})
+        pred.append({"value": y_pred_in_bin, "name": bin_name})
 
     # print("Test Data Distribution:")
     # print(y_test_label)
@@ -87,8 +93,11 @@ def evaluate_model():
 
 
 def predict(data):
-    X = pd.DataFrame([[data['degree'], data['categories'], data['area']]], columns=['degree', 'categories', 'area'])
-    name = ['0-2000', '2000-6000', '6000-10000', '10000-20000', '20000以上']
+    X = pd.DataFrame(
+        [[data["degree"], data["categories"], data["area"]]],
+        columns=["degree", "categories", "area"],
+    )
+    name = ["0-2000", "2000-6000", "6000-10000", "10000-20000", "20000以上"]
     # 将单个数据点转换为DataFrame，以便与训练数据保持一致
     X_encoded = enc.transform(X)
     Y = model.predict(X_encoded.toarray())

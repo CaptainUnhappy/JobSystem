@@ -17,25 +17,56 @@
 - MySQL 数据库
 - Chrome 浏览器（用于爬虫）
 
-## 完整启动步骤
+## 🚀 快速开始 (Quick Start)
 
-### 1. 安装python
+本节将指导您快速启动并运行本项目。请按照以下步骤操作：
 
-### 2. 安装必需的依赖包
+**1. 创建并激活虚拟环境 (Create and Activate Virtual Environment)**
+
+为了隔离项目依赖，强烈建议您创建一个虚拟环境。  
+在项目根目录下，执行以下命令：
+
 ```bash
-pip install flask==2.0.1
-pip install pymysql==1.0.2
-pip install pandas
-pip install numpy
-pip install scikit-learn
-pip install selenium-wire
-pip install undetected-chromedriver
-pip install flask-sqlalchemy
-pip install wordcloud
-pip install jieba
+# 创建虚拟环境 (仅需执行一次)
+    python -m venv venv
+
+# 激活虚拟环境 (每次启动项目前都需要执行)
+# 在 macOS/Linux 上：
+source venv/bin/activate
+# 在 Windows 上 (PowerShell)：
+.\venv\Scripts\activate
+# 在 Windows 上 (Command Prompt)：
+venv\Scripts\activate
 ```
 
-### 3. 数据库配置
+**2. 安装依赖包 (Install Dependencies)**
+
+本项目的所有依赖包都列在 `requirements.txt` 文件中。  
+在激活的虚拟环境中，执行以下命令安装所有依赖：
+```bash
+pip install -r requirements.txt
+```
+
+**3. 运行项目 (Run the Project)**
+
+完成以上步骤后，您就可以运行本项目了。  
+
+```bash
+python app.py
+# 或者
+flask run
+```
+
+
+**4. 访问系统**
+- 打开浏览器访问：http://localhost:5000
+- 默认会跳转到登录页面：http://localhost:5000/login
+- 首次使用需要注册账号 或 使用 账号/密码: admin/admin
+
+### 以下为可选内容 爬取数据
+如果需要最新数据，运行爬虫脚本：
+
+### 1. 数据库配置
 1. 创建数据库：
 ```sql
 CREATE DATABASE boss DEFAULT CHARACTER SET utf8mb4;
@@ -56,21 +87,10 @@ DB_CONFIG = {
 }
 ```
 
-### 4. 爬取数据（可选）
-如果需要最新数据，运行爬虫脚本：
+运行爬虫脚本
 ```bash
 python jobSpider.py
 ```
-
-### 5. 启动项目
-```bash
-python app.py
-```
-
-### 6. 访问系统
-- 打开浏览器访问：http://localhost:5000
-- 默认会跳转到登录页面：http://localhost:5000/login
-- 首次使用需要注册账号 或 使用 账号/密码: admin/admin
 
 ## 目录结构
 ```
