@@ -63,7 +63,8 @@ flask run
 - 默认会跳转到登录页面：http://localhost:5000/login
 - 首次使用需要注册账号 或 使用 账号/密码: admin/admin
 
-## 爬取数据 (可选)
+<details>
+  <summary>爬取数据 (可选)</summary>
 如果需要最新数据，运行爬虫脚本：
 
 **1. 创建数据库：**
@@ -90,6 +91,7 @@ DB_CONFIG = {
 ```bash
 python jobSpider.py
 ```
+</details>
 
 ## 目录结构
 ```
