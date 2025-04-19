@@ -55,7 +55,8 @@ def register():
         password2 = request_form["Password2"]
         if password != password2:
             return render_template("registration.html", state="pwd_error")
-        users = query.querys("select * from user where email=%s", [email], "select")
+        users = query.querys(
+            "select * from user where email=%s", [email], "select")
         if len(users):
             return render_template("registration.html", state="email_error")
         else:
@@ -78,7 +79,8 @@ def home():
     industry_data = utils.get_industry_data()
     # 学历要求
     degree_num, degree_salary = utils.get_degree_data()
-    user = query.querys("select name from user where email = %s", [email], "select")
+    user = query.querys(
+        "select name from user where email = %s", [email], "select")
     return render_template(
         "index.html",
         name=user[0][0],

@@ -67,7 +67,8 @@ def get_trend_data():  # 职位薪资增长趋势模型
         # 跳过缺失值，只对纯数值行列计算
         pd.set_option("display.precision", 2)
         salary = (
-            df[condition]["salary"].astype(float).mean(skipna=True, numeric_only=True)
+            df[condition]["salary"].astype(float).mean(
+                skipna=True, numeric_only=True)
         )
         salary = numpy.nan_to_num(salary)
         dic = {
@@ -95,7 +96,8 @@ def get_industry_data():
     industry_data = ""
     # 计算每个组的大小，并按降序排序
     now_group = (
-        df[condition_now].groupby("categories").size().sort_values(ascending=False)
+        df[condition_now].groupby(
+            "categories").size().sort_values(ascending=False)
     )
     now = df[condition_now].groupby("categories")
     last = df[condition_last].groupby("categories")
@@ -299,7 +301,7 @@ def get_realtime_data():
 
 def get_inclination():
     today = str(datetime.date.today())
-    time_list = list(pd.date_range(end=today, periods=7))
+    time_list = list(pd.date_range(end=today, periods=30))
     time_list = list(map(str, time_list))
     trend_time = []
     trend_salary = []
@@ -352,7 +354,8 @@ def get_company_data():
         ]:
             result = df.query("company_property==@p& company_scale==@s")
             pd.set_option("display.precision", 2)
-            salary = result["salary"].astype(float).mean(skipna=True, numeric_only=True)
+            salary = result["salary"].astype(float).mean(
+                skipna=True, numeric_only=True)
             if math.isnan(salary):
                 salary = 0
             else:

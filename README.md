@@ -1,7 +1,9 @@
 # 职位信息分析系统
 
 ## 项目简介
+
 这是一个基于 Flask 开发的职位信息分析系统，提供以下功能：
+
 - 用户登录注册
 - 首页数据展示
 - 职位精确查询
@@ -13,6 +15,7 @@
 - 贝叶斯预测
 
 ## 环境要求
+
 - Python 3.7+
 - MySQL 数据库
 - Chrome 浏览器（用于爬虫）
@@ -34,6 +37,7 @@
 # 在 macOS/Linux 上：
 source venv/bin/activate
 # 在 Windows 上 (PowerShell)：
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned -Force
 .\venv\Scripts\activate
 # 在 Windows 上 (Command Prompt)：
 venv\Scripts\activate
@@ -43,13 +47,14 @@ venv\Scripts\activate
 
 本项目的所有依赖包都列在 `requirements.txt` 文件中。  
 在激活的虚拟环境中，执行以下命令安装所有依赖：
+
 ```bash
 pip install -r requirements.txt
 ```
 
 **3. 运行项目 (Run the Project)**
 
-完成以上步骤后，您就可以运行本项目了。  
+完成以上步骤后，您就可以运行本项目了。
 
 ```bash
 python app.py
@@ -57,8 +62,8 @@ python app.py
 flask run
 ```
 
-
 **4. 访问系统**
+
 - 打开浏览器访问：http://localhost:5000
 - 默认会跳转到登录页面：http://localhost:5000/login
 - 首次使用需要注册账号 或 使用 账号/密码: admin/admin
@@ -68,6 +73,7 @@ flask run
 如果需要最新数据，运行爬虫脚本：
 
 **1. 创建数据库：**
+
 ```sql
 CREATE DATABASE boss DEFAULT CHARACTER SET utf8mb4;
 ```
@@ -77,6 +83,7 @@ CREATE DATABASE boss DEFAULT CHARACTER SET utf8mb4;
 `jobs_info.sql`
 
 **3. 修改数据库连接配置（utils/config.py）：**
+
 ```python
 DB_CONFIG = {
     'host': 'localhost',
@@ -88,12 +95,16 @@ DB_CONFIG = {
 ```
 
 **4. 运行爬虫脚本**
+
 ```bash
+pip install selenium
 python jobSpider.py
 ```
+
 </details>
 
 ## 目录结构
+
 ```
 ├── app.py              # 主程序入口
 ├── jobSpider.py        # 爬虫程序
@@ -110,6 +121,7 @@ python jobSpider.py
 ```
 
 ## 注意事项
+
 1. 确保 MySQL 服务已经启动
 2. 确保数据库连接配置正确
 3. 建议使用虚拟环境运行项目

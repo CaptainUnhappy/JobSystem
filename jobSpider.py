@@ -4,11 +4,12 @@ from selenium.webdriver import ChromeOptions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-import seleniumwire.undetected_chromedriver as uc
+# import seleniumwire.undetected_chromedriver as uc
 from lxml import html
 import json
 import pymysql
-import datetime, time
+import datetime
+import time
 from utils.config import DB_CONFIG
 import requests
 
